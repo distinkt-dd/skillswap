@@ -1,0 +1,1 @@
+export { ClosestOffers } from './ui';

@@ -1,0 +1,83 @@
+.carouselContainer {
+  display: grid;
+  grid-template-columns: 324px 92px;
+  gap: 24px;
+}
+
+.carouselGeneral {
+  aspect-ratio: 1/1;
+  position: relative;
+}
+
+.btn {
+  position: absolute;
+  top: calc(50% - 16px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inline-size: 32px;
+  block-size: 32px;
+  color: var(--color-text);
+  background-color: var(--color-disabled);
+  border-radius: 50%;
+}
+
+.left {
+  left: 16px;
+  transform: rotate(180deg);
+}
+
+.right {
+  right: 16px;
+}
+
+.carouselGeneral img {
+  aspect-ratio: 1/1;
+  inline-size: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.carouselList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  block-size: 100%;
+  overflow: hidden;
+}
+
+.carouselItem {
+  position: relative;
+  inline-size: 92px;
+  block-size: 92px;
+  aspect-ratio: 1/1;
+}
+
+.carouselItem img {
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: 12px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center;
+}
+
+.fade {
+  position: absolute;
+  inset: 0;
+  background-color: color-mix(in srgb, var(--color-disabled) 50%, transparent);
+  border-radius: 12px;
+}
+
+.fade::after {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inline-size: 100%;
+  block-size: 100%;
+  font-weight: 500;
+  font-size: 18px;
+  content: attr(data-num);
+}

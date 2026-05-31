@@ -1,0 +1,92 @@
+.categoryFilter {
+  margin-bottom: 24px;
+}
+
+.categoryFilter h4 {
+  margin: 0 0 16px;
+  color: var(--color-text, #253017);
+  font-weight: 500;
+  font-size: 20px;
+  font-family: 'Jost', 'Arial', sans-serif;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  vertical-align: middle;
+}
+
+.category {
+  margin-bottom: 12px;
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  color: var(--color-text, #253017);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.categoryHeader:hover {
+  background-color: var(--color-background, #f9faf7);
+}
+
+.categoryHeader svg {
+  color: var(--color-caption, #69735d);
+}
+
+.categoryCheckbox {
+  width: 100%;
+}
+
+.categoryCheckbox [class*='label'] {
+  color: var(--color-text, #253017);
+  font-weight: 400;
+  font-size: 16px;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.subcategories {
+  display: flex;
+  flex-direction: column;
+  margin-left: 28px;
+  padding-left: 12px;
+}
+
+.subcategoryCheckbox {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.subcategoryCheckbox:last-child {
+  margin-bottom: 0;
+}
+
+.subcategoryCheckbox [class*='label'] {
+  color: var(--color-text, #253017);
+  font-weight: 400;
+  font-size: 16px;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.showAllButton {
+  justify-content: center;
+  width: 100%;
+  margin-top: 12px;
+  color: var(--color-link-button-pressed, #508826);
+  font-weight: 400;
+  font-size: 16px;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}

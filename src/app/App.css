@@ -1,0 +1,57 @@
+@import url('./styles/variables.css');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@500&family=Roboto:wght@400;500&display=swap');
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1 {
+  font-weight: 500;
+  font-size: 32px;
+  font-family: 'Jost', sans-serif;
+  line-height: 1.25;
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 24px;
+  font-family: 'Jost', sans-serif;
+  line-height: 1.17;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: 20px;
+  font-family: 'Jost', sans-serif;
+  line-height: 1.2;
+}
+
+h4 {
+  font-weight: 500;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+}
+
+body {
+  font-weight: 400;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+}
+
+.caption {
+  font-weight: 400;
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.33;
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 36px;
+}

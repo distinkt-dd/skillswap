@@ -1,0 +1,101 @@
+.form_double {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.formTextSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.groupBox_double {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  gap: 24px;
+}
+
+.showChangePass {
+  align-self: start;
+  color: rgb(80 136 38 / 100%);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  transition: all 0.3s ease;
+}
+
+.changePass__container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.changePass__button {
+  align-self: start;
+  margin-top: 31px;
+}
+
+.submitButton {
+  margin-top: 20px;
+}
+
+/* Анимация для кнопки (slide) */
+
+.fadeEnter {
+  opacity: 0;
+}
+
+.fadeEnterActive {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.fadeExit {
+  opacity: 1;
+}
+
+.fadeExitActive {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+/* Анимация для инпута (slide) */
+
+.slideEnter {
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.slideEnterActive {
+  max-height: 100px;
+  overflow: hidden;
+  transform: translateY(0);
+  opacity: 1;
+  transition:
+    opacity 300ms,
+    transform 300ms,
+    max-height 300ms;
+}
+
+.slideExit {
+  max-height: 100px;
+  overflow: hidden;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.slideExitActive {
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(-20px);
+  opacity: 0;
+  transition:
+    opacity 300ms,
+    transform 300ms,
+    max-height 300ms;
+}

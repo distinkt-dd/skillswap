@@ -1,0 +1,32 @@
+.hr {
+  position: relative;
+  height: 1px;
+  overflow: visible;
+  background-color: var(--color-disabled);
+  border: none;
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10000;
+    display: block;
+    padding: 0 4px;
+    color: var(--color-text);
+    font-weight: 500;
+    background-color: var(--color-card-input);
+    transform: translate(-50%, -50%);
+    content: 'или';
+  }
+}
+
+.social {
+  border-color: var(--color-caption);
+}
+
+.navlink {
+  display: block;
+  max-width: max-content;
+  margin: 0 auto;
+  color: var(--color-link-button-pressed);
+}

@@ -1,0 +1,62 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip-path: inset(50%);
+}
+
+.control {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  background: var(--color-card-input, #ffffff);
+  border: 2px solid var(--color-text, #253017);
+  border-radius: 50%;
+  transition: border-color 0.2s ease;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.input:checked + .control {
+  border-color: var(--color-link-button-pressed, #508826);
+}
+
+.input:checked + .control .dot {
+  background: var(--color-link-button-pressed, #508826);
+}
+
+.input:focus-visible + .control {
+  outline: 2px solid var(--color-link-button-pressed, #1b5f6b);
+  outline-offset: 2px;
+}
+
+.label {
+  color: var(--color-text, #0a0a0a);
+  font-size: 14px;
+  line-height: 1.2;
+}

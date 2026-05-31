@@ -1,0 +1,1 @@
+export { UserCardWidget } from './UserCardWidget';

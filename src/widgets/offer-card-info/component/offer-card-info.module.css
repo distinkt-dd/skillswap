@@ -1,0 +1,17 @@
+.offerCardInfo__container {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.offer-card-info__user-card {
+  flex: 0 0 324px;
+  max-inline-size: 324px;
+}
+
+.offerCardInfo__container > :last-child {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+}

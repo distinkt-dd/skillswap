@@ -1,0 +1,197 @@
+.notification {
+  display: flex;
+  background: transparent;
+  border-radius: 12px;
+}
+
+.popup {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: fit-content;
+  padding: 24px 34px 24px 24px;
+  background: var(--color-button-hover);
+  border-radius: 12px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 436px;
+  background: transparent;
+  border: none;
+}
+
+.unread {
+  opacity: 1;
+}
+
+.read {
+  opacity: 0.7;
+}
+
+.popup .iconContainer {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  background: transparent;
+}
+
+.popup .iconContainer svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 0.5;
+}
+
+.list .iconContainer {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+}
+
+.list .iconContainer svg {
+  width: 40px;
+  height: 40px;
+  fill: none;
+  stroke: var(--color-text, #253017);
+  stroke-width: 1.5;
+}
+
+.content {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.list .topContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.list .textContainer {
+  position: relative;
+  flex: 1;
+}
+
+.list .message {
+  margin-bottom: 4px;
+  color: var(--color-text, #253017);
+  font-weight: 400;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+  letter-spacing: 2%;
+}
+
+.list .description {
+  color: var(--color-caption, #69735d);
+  font-weight: 400;
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.33;
+  letter-spacing: 2%;
+}
+
+.list .timestamp {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: var(--color-disabled-text, #9ca197);
+  font-weight: 400;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+  letter-spacing: 2%;
+  white-space: nowrap;
+}
+
+.popup .message {
+  color: var(--color-text, #253017);
+  font-weight: 500;
+  font-size: 20px;
+  font-family: 'Jost', sans-serif;
+  line-height: 1.2;
+  letter-spacing: -1.1%;
+  white-space: nowrap;
+}
+
+.popup .description {
+  display: none;
+}
+
+.popup .closeButton {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 2;
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  padding: 0;
+  background: transparent;
+  border-radius: 4px;
+}
+
+.popup .closeButton:hover {
+  background: rgb(0 0 0 / 5%);
+}
+
+.popup .actionButton {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 2;
+  gap: 10px;
+  width: 74px;
+  height: 32px;
+  padding: 8px 12px;
+  color: var(--color-text, #253017);
+  font-size: 14px;
+  background: var(--color-card-input);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+}
+
+.list .actionButton {
+  align-self: flex-start;
+  gap: 8px;
+  width: 114px;
+  height: 48px;
+  margin-left: 0;
+  padding: 12px 24px;
+  color: var(--color-link-button-pressed, #508826);
+  font-size: 16px;
+  background: transparent;
+  border: 1px solid var(--color-link-button-pressed, #508826);
+  border-radius: 12px;
+}
+
+.list .actionButton:hover {
+  color: var(--color-text, #253017);
+  background: var(--color-button-hover, #deebc5);
+  border-color: var(--color-button-hover, #deebc5);
+}
+
+.popup .actionButton:hover {
+  color: var(--color-text, #253017);
+  background: var(--color-card-input);
+}
+
+.popup .actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}

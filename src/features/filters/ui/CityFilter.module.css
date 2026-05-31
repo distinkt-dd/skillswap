@@ -1,0 +1,55 @@
+.cityFilter {
+  margin-bottom: 24px;
+}
+
+.cityFilter h4 {
+  margin: 0 0 16px;
+  color: var(--color-text, #253017);
+  font-weight: 500;
+  font-size: 20px;
+  font-family: 'Jost', 'Arial', sans-serif;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  vertical-align: middle;
+}
+
+.citiesList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 200px;
+  margin-bottom: 12px;
+  overflow-y: auto;
+  transition: max-height 0.3s ease;
+}
+
+.citiesList[style*='max-height: none'] {
+  overflow-y: visible;
+}
+
+.cityCheckbox {
+  display: flex;
+  align-items: center;
+}
+
+.cityCheckbox [class*='label'] {
+  color: var(--color-text, #253017);
+  font-weight: 400;
+  font-size: 16px;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.showAllButton {
+  justify-content: center;
+  width: 100%;
+  color: var(--color-link-button-pressed, #508826);
+  font-weight: 400;
+  font-size: 16px;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}

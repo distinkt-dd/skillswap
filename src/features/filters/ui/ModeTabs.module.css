@@ -1,0 +1,17 @@
+.modeTabs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.modeTabs [class*='label'] {
+  color: var(--color-text, #253017);
+  font-weight: 400;
+  font-size: 16px;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+  cursor: pointer;
+}

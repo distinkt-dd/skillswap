@@ -1,0 +1,47 @@
+:root {
+  --color-text: #253017;
+  --color-caption: #69735d;
+  --color-disabled-text: #9ca197;
+  --color-toggle: #b2b9a9;
+  --color-disabled: #e4e8df;
+  --color-card-input: #ffffff;
+  --color-link-button-pressed: #508826;
+  --color-accent: #abd27a;
+  --color-button-hover: #deebc5;
+  --color-background: #f9faf7;
+  --color-background-white: #ffffff;
+  --color-alarm: #e0796e;
+  --color-error: #bf3920;
+  --color-tag-business: #eee7f7;
+  --color-tag-creative: #f7e7f2;
+  --color-tag-languages: #ebe5c5;
+  --color-tag-education: #e7f2f6;
+  --color-tag-home: #f7ebe5;
+  --color-tag-health: #e9f7e7;
+  --color-tag-other: #e8ecf7;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --color-text: #eef4e7;
+  --color-caption: #a6b09b;
+  --color-disabled-text: #7f8875;
+  --color-toggle: #5f6855;
+  --color-disabled: #2c3428;
+  --color-card-input: #1d231b;
+  --color-link-button-pressed: #8fbe5f;
+  --color-accent: #6f9943;
+  --color-button-hover: #313c2a;
+  --color-background: #121610;
+  --color-background-white: #1a2018;
+  --color-alarm: #f08d80;
+  --color-error: #ff7d69;
+  --color-tag-business: #3a3144;
+  --color-tag-creative: #443141;
+  --color-tag-languages: #49432b;
+  --color-tag-education: #2f4148;
+  --color-tag-home: #473830;
+  --color-tag-health: #2f452f;
+  --color-tag-other: #30394a;
+  color-scheme: dark;
+}

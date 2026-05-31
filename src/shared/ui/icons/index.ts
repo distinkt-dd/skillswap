@@ -1,0 +1,1 @@
+export { IconUI } from './icon';

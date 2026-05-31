@@ -1,0 +1,127 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.label {
+  margin-bottom: 4px;
+  color: var(--color-text);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.required {
+  margin-left: 4px;
+  color: var(--color-error);
+}
+
+.textareaWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.textarea {
+  height: 120px;
+  inline-size: 100%;
+  padding: 12px 20px;
+  color: var(--color-text);
+  font-size: 16px;
+  font-family: inherit;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  background: var(--color-card-input);
+  border: 1px solid var(--color-caption);
+  border-radius: 12px;
+  outline: none;
+  resize: none;
+  caret-color: var(--color-link-button-pressed);
+}
+
+.textarea::placeholder {
+  color: var(--color-caption);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.textarea:focus::placeholder {
+  opacity: 0;
+}
+
+.textarea.error {
+  border-color: var(--color-error);
+}
+
+.textarea.disabled {
+  background-color: var(--color-disabled);
+  cursor: not-allowed;
+}
+
+.textarea:hover,
+.textarea.error:hover,
+.textarea.success:hover {
+  border-color: inherit;
+}
+
+.textarea:focus,
+.textarea.error:focus,
+.textarea.success:focus {
+  border-color: inherit;
+  box-shadow: none;
+}
+
+.textarea.withLeftIcon {
+  padding-left: 44px;
+}
+
+.textarea.withRightIcon {
+  padding-right: 44px;
+}
+
+.errorMessage {
+  margin-top: 4px;
+  color: var(--color-error);
+  font-size: 12px;
+  line-height: 1.33;
+  letter-spacing: 0.02em;
+}
+
+.hint {
+  margin-top: 4px;
+  color: var(--color-text);
+  font-size: 12px;
+  line-height: 1.33;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  color: var(--color-caption);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.icon.clickable {
+  z-index: 3;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.leftIcon {
+  left: 12px;
+}
+
+.rightIcon {
+  right: 12px;
+}

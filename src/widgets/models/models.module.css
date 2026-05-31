@@ -1,0 +1,55 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 52px;
+  min-width: 556px;
+  padding: 80px 60px;
+  text-align: center;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  max-width: 100%;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--color-text);
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.description {
+  width: 403px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  text-wrap: wrap;
+}
+
+.btnWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}

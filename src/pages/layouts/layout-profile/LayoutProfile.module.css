@@ -1,0 +1,14 @@
+.profileSection {
+  width: 100%;
+  max-width: 100%;
+}
+
+.layoutProfile {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+
+.content {
+  grid-column: 4/13;
+}

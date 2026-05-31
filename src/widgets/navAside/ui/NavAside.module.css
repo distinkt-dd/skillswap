@@ -1,0 +1,19 @@
+.aside {
+  display: flex;
+  grid-column: 1/4;
+  justify-content: center;
+  min-width: 250px;
+  min-height: 752px;
+  padding: 40px;
+  background-color: var(--color-card-input);
+  border-radius: 24px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  width: 100%;
+  max-width: 244px;
+  margin: 0;
+}

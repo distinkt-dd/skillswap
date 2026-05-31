@@ -1,0 +1,48 @@
+.section {
+  width: 100%;
+  max-width: 100%;
+}
+
+.content {
+  display: flex;
+  gap: 24px;
+  min-height: 692px;
+}
+
+.illustration {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 556px;
+  min-height: 100%;
+  padding: 132px 60px;
+  background-color: var(--color-card-input);
+  border-radius: 12px;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 436px;
+  text-align: center;
+}
+
+.imgIlustration {
+  width: 300px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+* {
+  margin: 0;
+}
