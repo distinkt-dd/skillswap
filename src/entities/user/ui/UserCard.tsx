@@ -74,10 +74,6 @@ export const UserCard: React.FC<UserCardProps> = ({
   const currentUser = useSelector(selectedUser);
   const currentOffer = offers.find((item) => item.userId === id);
 
-  React.useEffect(() => {
-    console.log(offers);
-  }, [offers]);
-
   // Исправленная работа с localStorage
   const sendsOffers = React.useMemo(() => {
     try {
