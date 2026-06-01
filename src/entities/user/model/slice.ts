@@ -1,14 +1,14 @@
 // slice.ts
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { TUser } from '../api/types';
-import { fetchUsers, login, logout, register, updateDateUser, updatePassword } from './actions';
+import { checkUserAuth, fetchUsers, login, logout, register, updateDateUser } from './actions';
 
 type TUserInitialState = {
   user: TUser | null;
   users: TUser[];
   error: string | '';
   isResponse: boolean;
-  isAuthChecked: boolean;
+  isAuthChecked: boolean; // false = проверка идет, true = проверка завершена
 };
 
 const userInitialState: TUserInitialState = {
@@ -16,7 +16,7 @@ const userInitialState: TUserInitialState = {
   users: [],
   error: '',
   isResponse: false,
-  isAuthChecked: true,
+  isAuthChecked: false, // Изначально false!
 };
 
 export const userSlice = createSlice({
@@ -25,13 +25,9 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<TUser>) => {
       state.user = action.payload;
-      state.isAuthChecked = true;
     },
     clearUser: (state) => {
       state.user = null;
-      // Очистка вынесена в api, но дублируем локально
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
     },
     setIsAuthChecked: (state, action: PayloadAction<boolean>) => {
       state.isAuthChecked = action.payload;
@@ -49,6 +45,20 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // --- Проверка авторизации ---
+      .addCase(checkUserAuth.pending, (state) => {
+        state.isAuthChecked = false;
+      })
+      .addCase(checkUserAuth.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isAuthChecked = true;
+      })
+      .addCase(checkUserAuth.rejected, (state) => {
+        state.user = null;
+        state.isAuthChecked = true;
+      })
+
+      // --- Логин и Регистрация ---
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuthChecked = true;
@@ -57,77 +67,51 @@ export const userSlice = createSlice({
       })
       .addCase(login.pending, (state) => {
         state.isResponse = true;
-        state.error = '';
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.error.message as string;
         state.isResponse = false;
-        state.isAuthChecked = true;
       })
       .addCase(register.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isAuthChecked = true;
         state.isResponse = false;
-        state.error = '';
       })
       .addCase(register.pending, (state) => {
         state.isResponse = true;
-        state.error = '';
       })
       .addCase(register.rejected, (state, action) => {
         state.error = action.error.message as string;
         state.isResponse = false;
-        state.isAuthChecked = true;
       })
-      .addCase(updatePassword.fulfilled, (state) => {
-        state.isResponse = false;
-        state.error = '';
-      })
-      .addCase(updatePassword.rejected, (state, action) => {
-        state.isResponse = false;
-        state.error = action.error.message as string;
-      })
-      .addCase(updatePassword.pending, (state) => {
-        state.isResponse = true;
-      })
+
+      // --- Остальное ---
       .addCase(updateDateUser.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.isAuthChecked = true;
-        state.isResponse = false;
-        state.error = '';
-      })
-      .addCase(fetchUsers.fulfilled, (state, action) => {
-        state.users = action.payload;
-        state.isResponse = false;
-        state.error = '';
-      })
-      .addCase(fetchUsers.pending, (state) => {
-        state.isResponse = true;
-        state.error = '';
-      })
-      .addCase(fetchUsers.rejected, (state, action) => {
-        state.error = action.error.message as string;
         state.isResponse = false;
       })
       .addCase(updateDateUser.pending, (state) => {
         state.isResponse = true;
-        state.error = '';
       })
       .addCase(updateDateUser.rejected, (state, action) => {
         state.error = action.error.message as string;
         state.isResponse = false;
-        state.isAuthChecked = true;
+      })
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.users = action.payload;
+        state.isResponse = false;
+      })
+      .addCase(fetchUsers.pending, (state) => {
+        state.isResponse = true;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
         state.isAuthChecked = true;
-        state.error = '';
       });
   },
 });
 
 export const { setUser, clearUser, setIsAuthChecked, clearUserError } = userSlice.actions;
-
 export const {
   selectedUser,
   selectedUsers,
