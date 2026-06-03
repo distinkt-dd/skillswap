@@ -1,7 +1,7 @@
-import styles from './footer.module.css';
-import React from 'react';
 import { Logo } from '@shared/index';
 import clsx from 'clsx';
+import React from 'react';
+import styles from './footer.module.css';
 // import { NavLink } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
       <div className={clsx(styles.container, 'container')}>
         <div className={styles.leftColumn}>
           <Logo />
-          <span className={styles.copiright}>SkillSwap - 2025</span>
+          <span className={styles.copiright}>SkillSwap - 2026</span>
         </div>
         <div className={styles.content}>
           <ul className={styles.linksList}>

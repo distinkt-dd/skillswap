@@ -1,17 +1,11 @@
-import { useDispatch, useSelector } from '@shared/store';
-import { setUser, clearUser, selectedUser } from '@entities/user';
+import { clearUser, setUser } from '@entities/user';
+import { useDispatch } from '@shared/store';
 import { Button } from '@shared/ui';
 import { ProfileForm } from '@widgets/profile/ui';
-import { useEffect } from 'react';
 import { RegisterForm } from '@widgets/register/ui';
 
 export const TempHome = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectedUser);
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   const handleTestLogin = () => {
     dispatch(
@@ -107,9 +101,28 @@ export const TempLogin = () => (
 export const TempRegister = () => <RegisterForm />;
 
 export const TempAbout = () => (
-  <div style={{ padding: '20px' }}>
-    <h1>О проекте</h1>
-    <p>Макет использует LayoutNauth</p>
+  <div
+    className="container"
+    style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}
+  >
+    <h1>SkillSwap</h1>
+    <p> Платформа обмена навыками «Я научу / Хочу научиться»</p>
+    <p> Приложение создано в рамках курсовой работы! </p>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <h2>Авторы</h2>
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '20px' }}>
+        <h3>
+          Githubs:{' '}
+          <a target="_blank" href="https://github.com/distinkt-dd">
+            @distinkt-dd
+          </a>
+          ;{' '}
+          <a target="_blank" href="https://github.com/barawek55">
+            @barawek
+          </a>
+        </h3>
+      </div>
+    </div>
   </div>
 );
 

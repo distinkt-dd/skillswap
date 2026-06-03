@@ -19,8 +19,10 @@ export const register = createAsyncThunk<TUser, TRegisterUser>(
   }
 );
 
+// ТЕПЕРЬ: Запрашивает данные с сервера
 export const checkUserAuth = createAsyncThunk<TUser | null>('user/checkUserAuth', async () => {
-  return userApi.getUserFromStorage();
+  const data = await userApi.checkMe();
+  return data ? data.user : null;
 });
 
 export const updatePassword = createAsyncThunk<void, TUpdateUserPass>(
@@ -41,7 +43,6 @@ export const fetchUsers = createAsyncThunk<TUser[]>('user/fetchUsers', async () 
   return await userApi.getUsers();
 });
 
-// Дополнительно: экшен для логаута (очистка)
 export const logout = createAsyncThunk('user/logout', async () => {
   userApi.clearAuthData();
 });
