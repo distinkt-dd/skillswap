@@ -6,20 +6,20 @@ import {
   type TLoginUser,
 } from '@entities/user';
 import { useFormValidation } from '@shared/api';
-import { Button, IconUI } from '@shared/ui';
-import { Input } from '@shared/ui';
-import Form from '@shared/ui/form';
-import { useState, type ChangeEvent } from 'react';
 import { useDispatch, useSelector } from '@shared/store';
-import styles from './login.module.css';
+import { Button, IconUI, Input } from '@shared/ui';
+import Form from '@shared/ui/form';
 import clsx from 'clsx';
+import { useState, type ChangeEvent } from 'react';
 import { NavLink } from 'react-router-dom';
+import styles from './login.module.css';
 
 interface LoginFormProps {
   onSuccess?: () => void;
+  classNames?: string;
 }
 
-export const LoginForm = ({ onSuccess }: LoginFormProps) => {
+export const LoginForm = ({ onSuccess, classNames }: LoginFormProps) => {
   const [formData, setFormData] = useState<TLoginUser>({
     email: '',
     password: '',
@@ -56,7 +56,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} error={error}>
+    <Form classNames={classNames} onSubmit={handleSubmit} error={error}>
       <Button
         className={clsx(styles.social)}
         type="button"

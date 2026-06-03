@@ -1,3 +1,4 @@
+import type React from 'react';
 import type { SVGProps } from 'react';
 
 export interface IconProps {
@@ -9,6 +10,8 @@ export interface IconProps {
 export type IconName = keyof IconsMap;
 
 export type IconsMap = {
+  menu: React.FC<SVGProps<SVGSVGElement>>;
+  filter: React.FC<SVGProps<SVGSVGElement>>;
   google: React.FC<SVGProps<SVGSVGElement>>;
   apple: React.FC<SVGProps<SVGSVGElement>>;
   add: React.FC<SVGProps<SVGSVGElement>>;

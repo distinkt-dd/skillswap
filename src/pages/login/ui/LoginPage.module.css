@@ -46,3 +46,14 @@
 * {
   margin: 0;
 }
+
+@media (width <=765px) {
+  .illustration {
+    display: none;
+  }
+
+  .content {
+    display: block;
+    width: 100%;
+  }
+}

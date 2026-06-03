@@ -17,3 +17,10 @@
   font-size: 12px;
   text-align: center;
 }
+
+@media (width <= 764px) {
+  .form {
+    padding: 0;
+    min-width: unset;
+  }
+}

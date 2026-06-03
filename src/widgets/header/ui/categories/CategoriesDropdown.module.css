@@ -85,3 +85,12 @@
   margin-left: 0;
   padding-left: 4px;
 }
+
+@media (width <= 768px) {
+  .categoriesDropdown {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    width: 100%;
+  }
+}

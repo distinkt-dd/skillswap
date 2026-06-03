@@ -15,3 +15,9 @@
   flex: 1 1 auto;
   min-inline-size: 0;
 }
+
+@media (width <=1024px) {
+  .offerCardInfo__container {
+    flex-direction: column;
+  }
+}

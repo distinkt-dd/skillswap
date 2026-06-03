@@ -1,15 +1,17 @@
+import { useTheme } from '@app/theme/useTheme';
+import { selectedUser } from '@entities/user';
+import { useCatalogFilters } from '@features/filters';
+import { useSelector } from '@shared/store';
+import { Avatar, Button, IconUI, Input, Logo } from '@shared/ui';
+import { NotificationWrapper } from '@widgets/notifications/ui/Notification';
+import { UserMenu } from '@widgets/user-menu';
+import clsx from 'clsx';
 import type { FC } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './header.module.css';
-import { Button, IconUI, Input, Logo, Avatar } from '@shared/ui';
 import { CategoriesDropdown } from './categories';
+import styles from './header.module.css';
 import type { THeaderUIProps } from './type';
-import { selectedUser } from '@entities/user';
-import { useSelector } from '@shared/store';
-import { NotificationWrapper } from '@widgets/notifications/ui/Notification';
-import { useCatalogFilters } from '@features/filters';
-import { useTheme } from '@app/theme/useTheme';
 
 const SEARCH_DEBOUNCE_MS = 1200;
 const SEARCH_HISTORY_STORAGE_KEY = 'catalog-search-history';
@@ -36,7 +38,6 @@ const saveSearchHistory = (history: string[]) => {
     return;
   }
 };
-import { UserMenu } from '@widgets/user-menu';
 
 export const Header: FC<Partial<THeaderUIProps>> = ({
   isSkillsOpen = false,
@@ -62,6 +63,8 @@ export const Header: FC<Partial<THeaderUIProps>> = ({
   const [isNotificationOpen, setIsNotificationOpen] = useState<boolean>(false);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState<boolean>(false);
 
+  const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const notificationRef = useRef<HTMLDivElement>(null);
@@ -76,6 +79,11 @@ export const Header: FC<Partial<THeaderUIProps>> = ({
       }
     };
   }, []);
+
+  const handleMenuIsOpen = () => {
+    setMenuIsOpen(!menuIsOpen);
+    console.log(menuIsOpen);
+  };
 
   const commitSearch = (value: string) => {
     catalogFilterActions.setSearchQuery(value);
@@ -288,13 +296,7 @@ export const Header: FC<Partial<THeaderUIProps>> = ({
             <NavLink to="/" className={styles.logo}>
               <Logo />
             </NavLink>
-            <Button
-              variant="tertiary"
-              onClick={onClose}
-              iconPosition="right"
-              icon={<IconUI name="cross" />}
-              width={147}
-            >
+            <Button variant="tertiary" onClick={onClose} iconPosition="right" width={147}>
               Закрыть
             </Button>
           </nav>
@@ -353,92 +355,102 @@ export const Header: FC<Partial<THeaderUIProps>> = ({
                 )}
               </div>
             )}
-          </div>
 
-          <div className={styles.searchArea} ref={searchAreaRef}>
-            <Input
-              leftIcon={<IconUI name="search" />}
-              placeholder="Искать навык"
-              className={styles.searchInput}
-              variant="search"
-              fullWidth
-              value={isSearchDirty ? searchInput : catalogFilters.searchQuery}
-              onChange={(e) => handleSearchChange(e.target.value)}
-              onFocus={handleSearchFocus}
-              onBlur={handleSearchBlur}
-              aria-label="Поиск по категории или подкатегории навыка"
-            />
-            {isHistoryOpen && filteredHistory.length > 0 && (
-              <div className={styles.searchHistoryDropdown}>
-                {filteredHistory.map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    className={styles.searchHistoryItem}
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      handleHistorySelect(item);
-                    }}
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className={`${styles.rightGroup} ${isAuth ? styles.auth : ''}`}>
-            <button
-              type="button"
-              className={styles.themeButton}
-              onClick={toggleTheme}
-              aria-label={themeLabel}
-              title={themeLabel}
-            >
-              <IconUI
-                name={resolvedTheme === 'dark' ? 'sun' : 'moon'}
-                className={styles.themeIcon}
+            <div className={styles.searchArea} ref={searchAreaRef}>
+              <Input
+                leftIcon={<IconUI name="search" />}
+                placeholder="Искать навык"
+                className={styles.searchInput}
+                variant="search"
+                fullWidth
+                value={isSearchDirty ? searchInput : catalogFilters.searchQuery}
+                onChange={(e) => handleSearchChange(e.target.value)}
+                onFocus={handleSearchFocus}
+                onBlur={handleSearchBlur}
+                aria-label="Поиск по категории или подкатегории навыка"
               />
-            </button>
-
-            <div className={`${styles.buttonsGroup} ${isAuth ? styles.auth : ''}`}>
-              {isAuth ? (
-                <>
-                  <div
-                    ref={notificationTriggerRef}
-                    className={styles.notificationIconWrapper}
-                    onClick={() => setIsNotificationOpen(!isNotificationOpen)}
-                  >
-                    <IconUI name="notification" className={styles.notificationIcon} />
-                  </div>
-                  <NavLink to="/favorites">
-                    <IconUI name="like" className={styles.likeIcon} />
-                  </NavLink>
-                  <div
-                    ref={accountMenuTriggerRef}
-                    className={styles.userBlock}
-                    onClick={() => {
-                      setIsAccountMenuOpen(!isAccountMenuOpen);
-                    }}
-                  >
-                    <span className={styles.userName}>{user?.name}</span>
-                    <Avatar src={user?.avatar} size="small" />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <NavLink to="/login" className={styles.buttonLink}>
-                    <Button variant="secondary" width={98}>
-                      Войти
-                    </Button>
-                  </NavLink>
-                  <NavLink to="/registration" className={styles.buttonLink}>
-                    <Button variant="primary" width={208}>
-                      Зарегистрироваться
-                    </Button>
-                  </NavLink>
-                </>
+              {isHistoryOpen && filteredHistory.length > 0 && (
+                <div className={styles.searchHistoryDropdown}>
+                  {filteredHistory.map((item) => (
+                    <button
+                      key={item}
+                      type="button"
+                      className={styles.searchHistoryItem}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        handleHistorySelect(item);
+                      }}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
               )}
+            </div>
+          </div>
+
+          <Button
+            className={styles.burger}
+            variant="tertiary"
+            width={44}
+            children={<IconUI name="menu" size={44} />}
+            onClick={() => handleMenuIsOpen()}
+          />
+
+          <div className={clsx(styles.rightSection, menuIsOpen ? styles.rightSectionOpen : '')}>
+            <div className={`${styles.rightGroup} ${isAuth ? styles.auth : ''}`}>
+              <button
+                type="button"
+                className={styles.themeButton}
+                onClick={toggleTheme}
+                aria-label={themeLabel}
+                title={themeLabel}
+              >
+                <IconUI
+                  name={resolvedTheme === 'dark' ? 'sun' : 'moon'}
+                  className={styles.themeIcon}
+                />
+              </button>
+
+              <div className={`${styles.buttonsGroup} ${isAuth ? styles.auth : ''}`}>
+                {isAuth ? (
+                  <>
+                    <div
+                      ref={notificationTriggerRef}
+                      className={styles.notificationIconWrapper}
+                      onClick={() => setIsNotificationOpen(!isNotificationOpen)}
+                    >
+                      <IconUI name="notification" className={styles.notificationIcon} />
+                    </div>
+                    <NavLink to="/favorites">
+                      <IconUI name="like" className={styles.likeIcon} />
+                    </NavLink>
+                    <div
+                      ref={accountMenuTriggerRef}
+                      className={styles.userBlock}
+                      onClick={() => {
+                        setIsAccountMenuOpen(!isAccountMenuOpen);
+                      }}
+                    >
+                      <span className={styles.userName}>{user?.name}</span>
+                      <Avatar src={user?.avatar} size="small" />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <NavLink to="/login" className={styles.buttonLink}>
+                      <Button variant="secondary" width={98}>
+                        Войти
+                      </Button>
+                    </NavLink>
+                    <NavLink to="/registration" className={styles.buttonLink}>
+                      <Button variant="primary" width={208}>
+                        Зарегистрироваться
+                      </Button>
+                    </NavLink>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </nav>

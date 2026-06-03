@@ -1,17 +1,18 @@
 import type { FC } from 'react';
 import { Fragment, useEffect, useState } from 'react';
 
-import styles from './Catalog.module.css';
-import { CardSkeleton } from './CardSkeleton/CardSkeleton';
-import { CatalogList } from './CatalogList';
-import { CatalogSectionedBlocks } from './CatalogSectionedBlocks';
-import { AsideFilters } from '@widgets/aside-filters/ui';
+import { fetchUsers } from '@entities/user';
 import { useCatalogFilters } from '@features/filters';
-import { CatalogActiveFilterChips } from './CatalogActiveFilterChips';
+import { Button } from '@shared/index';
 import { useDispatch } from '@shared/store';
+import { AsideFilters } from '@widgets/aside-filters/ui';
 import { useCatalogInit } from '../model/hooks/useCatalogInit';
 import { useCatalogViewModel } from '../model/hooks/useCatalogViewModel';
-import { fetchUsers } from '@entities/user';
+import { CardSkeleton } from './CardSkeleton/CardSkeleton';
+import styles from './Catalog.module.css';
+import { CatalogActiveFilterChips } from './CatalogActiveFilterChips';
+import { CatalogList } from './CatalogList';
+import { CatalogSectionedBlocks } from './CatalogSectionedBlocks';
 
 export const Catalog: FC = () => {
   //!Временно диспатчу для обновления
@@ -45,6 +46,7 @@ export const Catalog: FC = () => {
   } = useCatalogViewModel(filters);
 
   const [prevSectionBuckets, setPrevSectionBuckets] = useState(sectionBuckets);
+  const [filterIsOpen, setFilterIsOpen] = useState<boolean>(false);
   if (sectionBuckets !== prevSectionBuckets) {
     setPrevSectionBuckets(sectionBuckets);
     if (!sectionBuckets) {
@@ -52,6 +54,10 @@ export const Catalog: FC = () => {
       setShowAllNew(false);
     }
   }
+
+  const handleFilter = () => {
+    setFilterIsOpen(!filterIsOpen);
+  };
 
   if (isAnyLoading && isInitialLoading) {
     return <div className={styles.loading}>Загрузка...</div>;
@@ -71,12 +77,21 @@ export const Catalog: FC = () => {
       <div className={styles.content}>
         {firstError && <div className={styles.errorBanner}>{firstError}</div>}
         <div className={styles.filters}>
+          <Button
+            variant="secondary"
+            width={147}
+            onClick={handleFilter}
+            className={styles.filterBTN}
+          >
+            {filterIsOpen ? 'Закрыть фильтры' : 'Открыть фильтры'}
+          </Button>
           <AsideFilters
             categories={categories}
             subcategories={subcategories}
             cities={cities}
             filters={filters}
             actions={filterActions}
+            classNames={`${styles.filterAside} ${filterIsOpen ? styles.filterOpen : ''}`}
           />
         </div>
 

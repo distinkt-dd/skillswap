@@ -1,4 +1,3 @@
-// shared/api.ts
 export class Api {
   readonly baseUrl: string = import.meta.env.VITE_SKILLSWAP_API_URL;
   readonly uri: string;
@@ -7,8 +6,6 @@ export class Api {
   constructor(uri: string) {
     this.uri = uri;
   }
-
-  // Установка токена для всех экземпляров
   static setToken(token: string | null) {
     Api.token = token;
   }
@@ -36,7 +33,6 @@ export class Api {
 
   protected checkResponse = async <T>(res: Response): Promise<T> => {
     if (res.ok) {
-      // если статус 204 (No Content) — вернуть пустой объект или null
       if (res.status === 204) {
         return {} as T;
       }
@@ -57,8 +53,6 @@ export class Api {
 
     throw new Error(errorMessage);
   };
-
-  // Методы для GET, POST, PATCH, DELETE с автоматической подстановкой заголовков
   protected async get<TResponse>(customUrl?: string): Promise<TResponse> {
     const url = customUrl || `${this.baseUrl}/${this.uri}`;
     return this.request<TResponse>(url, { method: 'GET' });

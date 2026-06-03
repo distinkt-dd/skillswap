@@ -1,16 +1,17 @@
-import React, { useMemo } from 'react';
+import type { TCategory } from '@entities/categories';
+import type { TCity } from '@entities/cities';
+import type { TSubCategory } from '@entities/subcategories';
 import {
-  ModeTabs,
   CategoryFilter,
-  GenderFilter,
   CityFilter,
-  type FiltersState,
+  GenderFilter,
+  ModeTabs,
   type FiltersActions,
+  type FiltersState,
 } from '@features/filters';
 import { Button, IconUI } from '@shared/ui';
-import type { TCategory } from '@entities/categories';
-import type { TSubCategory } from '@entities/subcategories';
-import type { TCity } from '@entities/cities';
+import clsx from 'clsx';
+import React, { useMemo } from 'react';
 import styles from './AsideFilters.module.css';
 
 interface AsideFiltersProps {
@@ -19,6 +20,7 @@ interface AsideFiltersProps {
   cities: TCity[];
   filters: FiltersState;
   actions: FiltersActions;
+  classNames?: string;
 }
 
 export const AsideFilters: React.FC<AsideFiltersProps> = ({
@@ -27,6 +29,7 @@ export const AsideFilters: React.FC<AsideFiltersProps> = ({
   cities,
   filters,
   actions,
+  classNames,
 }) => {
   // Подсчет количества выбранных значений в фильтрах
   const selectedValuesCount = useMemo(() => {
@@ -39,7 +42,7 @@ export const AsideFilters: React.FC<AsideFiltersProps> = ({
   }, [filters.mode, filters.cityIds, filters.skillIds, filters.gender]);
 
   return (
-    <aside className={styles.asideFilters}>
+    <aside className={clsx(styles.asideFilters, classNames)}>
       <div className={styles.header}>
         <h3>
           Фильтры

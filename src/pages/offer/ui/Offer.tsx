@@ -1,14 +1,15 @@
-import { OfferCardInfo } from '@widgets/index';
-import { useParams } from 'react-router-dom';
-import { getOfferById } from '@entities/offers/model/actions';
-import { useSelector, useDispatch } from '@shared/store';
-import { useEffect } from 'react';
 import {
   clearCurrentOffer,
   selectedCurrentOffer,
   selectedOffersIsResponse,
 } from '@entities/offers/model';
+import { getOfferById } from '@entities/offers/model/actions';
+import { useDispatch, useSelector } from '@shared/store';
 import { ClosestOffers } from '@widgets/closest-offers';
+import { OfferCardInfo } from '@widgets/index';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import styles from './offer.module.css';
 
 export const OfferPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -33,7 +34,7 @@ export const OfferPage = () => {
   if (isLoading) return <p>LOADING...</p>;
 
   return (
-    <div className="container">
+    <div className={`container ${styles.container}`}>
       <OfferCardInfo offer={offer} />
       <ClosestOffers offer={offer} />
     </div>

@@ -492,74 +492,81 @@ export const RegisterForm = () => {
   const showServerError = !suppressServerError && !!serverError;
 
   return (
-    <div className={styles.registerWrapper}>
-      <div className={styles.stepper}>
-        <span className={styles.stepperLabel}>Шаг {step} из 3</span>
-        <div className={styles.stepperLines}>
-          {([1, 2, 3] as const).map((n) => (
-            <div
-              key={n}
-              className={`${styles.stepperLine} ${n <= step ? styles.stepperLineDone : ''}`}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className={styles.registerCard}>
-        <div className={styles.registerFormColumn}>
-          {step === 1 && (
-            <RegisterStep1
-              data={data}
-              onChange={updateData}
-              errors={errors}
-              onErrorChange={updateErrors}
-            />
-          )}
-          {step === 2 && (
-            <RegisterStep2
-              data={data}
-              onChange={updateData}
-              errors={errors}
-              onErrorChange={updateErrors}
-            />
-          )}
-          {step === 3 && (
-            <RegisterStep3
-              data={data}
-              onChange={updateData}
-              errors={errors}
-              onErrorChange={updateErrors}
-            />
-          )}
-
-          {showServerError && <span className={styles.fieldError}>{serverError}</span>}
-
-          <div className={`${styles.buttonGroup} ${step === 1 ? styles.buttonGroupSingle : ''}`}>
-            {step > 1 && (
-              <Button variant="secondary" onClick={handleBack} type="button" disabled={isLoading}>
-                Назад
-              </Button>
-            )}
-            <Button variant="primary" onClick={handleNext} disabled={isLoading} loading={isLoading}>
-              {step < 3 ? 'Далее' : 'Продолжить'}
-            </Button>
+    <div className={`container ${styles.container}`}>
+      <div className={styles.registerWrapper}>
+        <div className={styles.stepper}>
+          <span className={styles.stepperLabel}>Шаг {step} из 3</span>
+          <div className={styles.stepperLines}>
+            {([1, 2, 3] as const).map((n) => (
+              <div
+                key={n}
+                className={`${styles.stepperLine} ${n <= step ? styles.stepperLineDone : ''}`}
+              />
+            ))}
           </div>
         </div>
 
-        <div className={styles.registerSidebar}>
-          <div className={styles.sidebarIllustration}>{illustration.icon}</div>
-          <h3 className={styles.sidebarTitle}>{illustration.title}</h3>
-          <p className={styles.sidebarSubtitle}>{illustration.subtitle}</p>
-        </div>
-      </div>
+        <div className={styles.registerCard}>
+          <div className={styles.registerFormColumn}>
+            {step === 1 && (
+              <RegisterStep1
+                data={data}
+                onChange={updateData}
+                errors={errors}
+                onErrorChange={updateErrors}
+              />
+            )}
+            {step === 2 && (
+              <RegisterStep2
+                data={data}
+                onChange={updateData}
+                errors={errors}
+                onErrorChange={updateErrors}
+              />
+            )}
+            {step === 3 && (
+              <RegisterStep3
+                data={data}
+                onChange={updateData}
+                errors={errors}
+                onErrorChange={updateErrors}
+              />
+            )}
 
-      <OfferPreviewModal
-        isOpen={showPreview}
-        data={data}
-        onEdit={() => setShowPreview(false)}
-        onConfirm={handleConfirm}
-        isLoading={isLoading}
-      />
+            {showServerError && <span className={styles.fieldError}>{serverError}</span>}
+
+            <div className={`${styles.buttonGroup} ${step === 1 ? styles.buttonGroupSingle : ''}`}>
+              {step > 1 && (
+                <Button variant="secondary" onClick={handleBack} type="button" disabled={isLoading}>
+                  Назад
+                </Button>
+              )}
+              <Button
+                variant="primary"
+                onClick={handleNext}
+                disabled={isLoading}
+                loading={isLoading}
+              >
+                {step < 3 ? 'Далее' : 'Продолжить'}
+              </Button>
+            </div>
+          </div>
+
+          <div className={styles.registerSidebar}>
+            <div className={styles.sidebarIllustration}>{illustration.icon}</div>
+            <h3 className={styles.sidebarTitle}>{illustration.title}</h3>
+            <p className={styles.sidebarSubtitle}>{illustration.subtitle}</p>
+          </div>
+        </div>
+
+        <OfferPreviewModal
+          isOpen={showPreview}
+          data={data}
+          onEdit={() => setShowPreview(false)}
+          onConfirm={handleConfirm}
+          isLoading={isLoading}
+        />
+      </div>
     </div>
   );
 };

@@ -81,3 +81,13 @@
   font-size: 18px;
   content: attr(data-num);
 }
+
+@media (width <=764px) {
+  .carouselContainer {
+    grid-template-columns: unset;
+  }
+  .carouselList {
+    flex-direction: row;
+  }
+}
+

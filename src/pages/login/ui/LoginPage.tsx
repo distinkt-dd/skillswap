@@ -1,6 +1,6 @@
+import { LoginForm } from '@widgets/login/ui';
 import clsx from 'clsx';
 import styles from './LoginPage.module.css';
-import { LoginForm } from '@widgets/login/ui';
 
 export const LoginPage = () => {
   return (
@@ -8,7 +8,7 @@ export const LoginPage = () => {
       <div className={clsx('container', styles.container)}>
         <h2>Вход</h2>
         <div className={clsx(styles.content)}>
-          <LoginForm />
+          <LoginForm classNames={styles.formLogin} />
           <div className={clsx(styles.illustration)}>
             <img src="/light-bulb.svg" alt="Light bulb" className={clsx(styles.imgIlustration)} />
             <div className={styles.textBlock}>

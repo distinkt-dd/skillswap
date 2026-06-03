@@ -557,3 +557,35 @@
   color: var(--color-caption);
   font-size: 14px;
 }
+
+@media (width <= 1024px) {
+  .registerCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: unset;
+    height: unset;
+  }
+
+  .registerFormColumn {
+    width: 100%;
+    padding: 0;
+  }
+
+  .registerSidebar {
+    display: none;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  .previewCard {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .previewActions {
+    flex-direction: column;
+  }
+}

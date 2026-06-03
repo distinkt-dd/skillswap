@@ -50,3 +50,16 @@
 .offerCard__carousel {
   justify-self: end;
 }
+
+@media (width <=1024px) {
+  .offerCard__container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (width <=467px) {
+  .offerCard {
+    padding: 25px 20px 20px;
+  }
+}

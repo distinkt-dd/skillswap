@@ -25,3 +25,13 @@
   width: 100%;
   margin-top: 60px;
 }
+
+@media (width <= 764px) {
+  .content {
+    margin: 10px auto 0;
+  }
+
+  .headerContainer {
+    position: static;
+  }
+}
