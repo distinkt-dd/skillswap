@@ -13,10 +13,10 @@ SkillSwap — одностраничное (SPA) приложение, в кот
 
 ## Запуск проекта
 
-1. Клонируем репозиторий `git clone https://github.com/PM-YandexPracticum/SkillSwap_46_1.git`
+1. Клонируем репозиторий `git clone link-to-repo`
 2. Устанавливаем зависимости: `npm install`
-3. Настроить переменные окружения в .env файле: `VITE_SKILLSWAP_API_URL=http://localhost:3000`
-4. Запуск проекта `npm run dev:all` - запускает и фронтенд и json-server
+3. Настроить переменные окружения в .env файле: `VITE_SKILLSWAP_API_URL=http://localhost:PORT`
+4. Запуск проекта `npm run dev` - запускает фронтенд
 5. Можно запустить тесты с изображением покрытия приложения в отдельном терминале `npm run test:coverage`
 
 ## Основные возможности:
