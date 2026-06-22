@@ -463,7 +463,7 @@ export const RegisterForm = () => {
         cityId: data.cityId,
         subcategoriesIds: data.subcategoriesIds,
         avatar,
-        description: '',
+        description: data.offerDescription,
       })
     );
 
