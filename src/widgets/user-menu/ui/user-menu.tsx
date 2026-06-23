@@ -1,9 +1,9 @@
-import type { FC, RefObject } from 'react';
-import styles from './user-menu.module.css';
-import { NavLink } from 'react-router-dom';
-import { IconUI } from '@shared/ui';
-import { useDispatch } from '@shared/store';
 import { clearUser } from '@entities/user';
+import { useDispatch } from '@shared/store';
+import { IconUI } from '@shared/ui';
+import type { FC, RefObject } from 'react';
+import { NavLink } from 'react-router-dom';
+import styles from './user-menu.module.css';
 
 export type TUserMenu = {
   refMenu: RefObject<HTMLDivElement | null>;
@@ -11,6 +11,10 @@ export type TUserMenu = {
 
 export const UserMenu: FC<TUserMenu> = ({ refMenu }) => {
   const dispatch = useDispatch();
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    dispatch(clearUser());
+  };
 
   return (
     <div ref={refMenu} className={styles.accountMenu}>
@@ -22,12 +26,7 @@ export const UserMenu: FC<TUserMenu> = ({ refMenu }) => {
           </NavLink>
         </li>
         <li>
-          <button
-            className={styles.accountMenu__item}
-            onClick={() => {
-              dispatch(clearUser());
-            }}
-          >
+          <button className={styles.accountMenu__item} onClick={handleLogout}>
             <IconUI name="logout" className={styles.accountMenu__icon} />
             <span>Выйти из аккаунта</span>
           </button>

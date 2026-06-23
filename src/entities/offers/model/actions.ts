@@ -23,6 +23,17 @@ export const getOfferById = createAsyncThunk(
   }
 );
 
+export const getOfferByUser = createAsyncThunk(
+  'offers/getOfferByUser',
+  async (id: string, { rejectWithValue }) => {
+    try {
+      return await offersApi.getOfferByUser(id);
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
 export const createOffer = createAsyncThunk(
   'offers/createOffer',
   async ({ userId, data }: { userId: string; data: TOfferCreate }, { rejectWithValue }) => {

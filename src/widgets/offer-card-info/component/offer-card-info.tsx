@@ -1,16 +1,16 @@
 import type { FC } from 'react';
 // import React, { useMemo, useRef, useState } from 'react';
-import styles from './offer-card-info.module.css';
+import { selectCities } from '@entities/cities/model/slice';
+import { selectedSubcategories } from '@entities/subcategories/model/slice';
 import { selectedUser, selectedUserIsResponse, selectedUsers, UserCard } from '@entities/user';
 import { useSelector } from '@shared/store';
-import { selectedSubcategories } from '@entities/subcategories/model/slice';
-import { selectCities } from '@entities/cities/model/slice';
+import styles from './offer-card-info.module.css';
 
-import { OfferCardUI } from '@widgets/offer-card/ui';
-import type { TOffer } from '@entities/offers/api/types';
 import { selectedCategories } from '@entities/categories/model';
+import type { TOffer } from '@entities/offers/api/types';
 import type { SkillItem } from '@entities/user/ui/UserCard';
 import { calculateAge } from '@shared/index';
+import { OfferCardUI } from '@widgets/offer-card/ui';
 
 type TOfferCardInfo = {
   offer: TOffer;

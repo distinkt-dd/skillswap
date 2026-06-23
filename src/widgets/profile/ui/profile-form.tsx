@@ -1,17 +1,4 @@
-import type { FC } from 'react';
-import React, { useMemo, useRef, useState } from 'react';
-import styles from './profile-form.module.css';
-import { useDispatch } from '@shared/store';
-import {
-  Calendar,
-  Dropdown,
-  Input,
-  IconUI,
-  TextAreaUI,
-  Button,
-  Avatar,
-  type DropdownOption,
-} from '@shared/ui';
+import { selectCities } from '@entities/cities';
 import {
   selectedUser,
   updateDateUser,
@@ -21,13 +8,25 @@ import {
   type TUpdateUser,
   type TUpdateUserPass,
 } from '@entities/user';
-import { useSelector } from '@shared/store';
-import Form from '@shared/ui/form';
-import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import { useFormValidation } from '@shared/api';
-import { selectCities } from '@entities/cities';
+import { useDispatch, useSelector } from '@shared/store';
+import {
+  Avatar,
+  Button,
+  Calendar,
+  Dropdown,
+  IconUI,
+  Input,
+  TextAreaUI,
+  type DropdownOption,
+} from '@shared/ui';
+import Form from '@shared/ui/form';
 import { generateRandomAvatar } from '@shared/utils/avatarGenerator';
 import ModalInfo from '@widgets/models/models.notifications';
+import type { FC } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import styles from './profile-form.module.css';
 
 export const ProfileForm: FC = () => {
   const dispatch = useDispatch();

@@ -1,12 +1,9 @@
 import type { FC } from 'react';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 
-import { fetchUsers } from '@entities/user';
 import { useCatalogFilters } from '@features/filters';
 import { Button } from '@shared/index';
-import { useDispatch } from '@shared/store';
 import { AsideFilters } from '@widgets/aside-filters/ui';
-import { useCatalogInit } from '../model/hooks/useCatalogInit';
 import { useCatalogViewModel } from '../model/hooks/useCatalogViewModel';
 import { CardSkeleton } from './CardSkeleton/CardSkeleton';
 import styles from './Catalog.module.css';
@@ -15,14 +12,6 @@ import { CatalogList } from './CatalogList';
 import { CatalogSectionedBlocks } from './CatalogSectionedBlocks';
 
 export const Catalog: FC = () => {
-  //!Временно диспатчу для обновления
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
-
-  //!Исправить этот хук чтобы всегда обновлял данные
-  useCatalogInit();
   const { filters, actions: filterActions } = useCatalogFilters();
   const [showAllPopular, setShowAllPopular] = useState(false);
   const [showAllNew, setShowAllNew] = useState(false);

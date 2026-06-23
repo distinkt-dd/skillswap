@@ -1,7 +1,7 @@
-import { type FC, type ReactElement } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
 import { selectedUser, selectedUserIsAuthChecked } from '@entities/user';
 import { useSelector } from '@shared/store';
+import { type FC, type ReactElement } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 
 type TProtectedRouteProps = {
   children: ReactElement;

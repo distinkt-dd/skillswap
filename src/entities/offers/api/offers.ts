@@ -24,6 +24,14 @@ export class OffersApi extends Api {
     }
   }
 
+  async getOfferByUser(id: string): Promise<TOffer> {
+    try {
+      return await this.request(`${this.baseUrl}/${this.uri}/byUser/${id}`);
+    } catch (error) {
+      throw new Error(`Ошибка получения данных: ${error}`);
+    }
+  }
+
   async createOffer(userId: string, data: TOfferCreate): Promise<TOffer> {
     try {
       const newOffer = {

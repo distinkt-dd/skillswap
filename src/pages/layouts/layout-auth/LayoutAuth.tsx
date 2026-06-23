@@ -1,12 +1,12 @@
-import type { FC, ReactNode } from 'react';
-import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Footer, Header } from '@widgets/index';
-import { useSelector } from '@shared/store';
-import styles from './LayoutAuth.module.css';
 import { selectedCategories } from '@entities/categories/model';
 import { selectedSubcategories } from '@entities/subcategories';
 import { useCatalogFilters } from '@features/filters';
+import { useSelector } from '@shared/store';
+import { Footer, Header } from '@widgets/index';
+import type { FC, ReactNode } from 'react';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import styles from './LayoutAuth.module.css';
 
 const CATALOG_PATHS = ['/', '/catalog'];
 

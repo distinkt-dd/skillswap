@@ -2,31 +2,26 @@ import './App.css';
 
 import {
   checkUserAuth,
+  fetchCities,
   fetchUsers,
+  getCategories,
+  getSubcategories,
   selectedUser,
   selectedUserIsAuthChecked,
-  setUser,
-  type TUser,
 } from '@entities/index';
 import { CatalogFiltersProvider } from '@features/filters';
 import { Catalog } from '@pages/catalog/ui';
-import {
-  DevelopmentPage,
-  ErrorPage,
-  LayoutAuth,
-  LayoutNauth,
-  LayoutPure,
-  LoginPage,
-} from '@pages/index';
+import { ErrorPage, LayoutAuth, LayoutNauth, LayoutPure, LoginPage } from '@pages/index';
 import { useSelector } from '@shared/store';
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { getCategories } from '@entities/categories/model';
-import { fetchCities, getOffers, getSubcategories } from '@entities/index';
+import { fetchAcceptedOffers, fetchReceivedApplications } from '@entities/application';
+import { getOfferByUser, getOffers } from '@entities/offers/model/actions';
 import { LayoutProfile } from '@pages/layouts';
 import { useDispatch } from '@shared/store';
 import { RegisterForm } from '@widgets/register/ui';
+import { RequestsWidget } from '@widgets/requests';
 import { useEffect } from 'react';
 import { ProtectedRoute } from './router/ProtectedRoute';
 import { TempAbout } from './test/temp-test-components';
@@ -62,14 +57,9 @@ const LoadingFallback = () => (
 
 export const App = () => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const user: string | null = localStorage.getItem('user');
-    if (user) {
-      const userParse: TUser = JSON.parse(user);
-      dispatch(setUser(userParse));
-    }
-  }, [dispatch]);
+  const user = useSelector(selectedUser);
+  const authChecked = useSelector(selectedUserIsAuthChecked);
+  const ErrorLayout = user && authChecked ? LayoutAuth : LayoutNauth;
 
   useEffect(() => {
     dispatch(getCategories());
@@ -80,9 +70,14 @@ export const App = () => {
     dispatch(checkUserAuth());
   }, [dispatch]);
 
-  const user = useSelector(selectedUser);
-  const authChecked = useSelector(selectedUserIsAuthChecked);
-  const ErrorLayout = user && authChecked ? LayoutAuth : LayoutNauth;
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    dispatch(getOfferByUser(user.id));
+    dispatch(fetchReceivedApplications());
+    dispatch(fetchAcceptedOffers());
+  }, [user, dispatch]);
 
   return (
     <CatalogFiltersProvider>
@@ -199,7 +194,7 @@ export const App = () => {
             element={
               <ProtectedRoute>
                 <LayoutProfile>
-                  <DevelopmentPage />
+                  <RequestsWidget />
                 </LayoutProfile>
               </ProtectedRoute>
             }

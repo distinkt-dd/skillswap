@@ -1,12 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { TOffer } from '../api/types';
-import { getOffers, getOfferById, createOffer, updateOffer, removeOffer } from './actions';
+import {
+  createOffer,
+  getOfferById,
+  getOfferByUser,
+  getOffers,
+  removeOffer,
+  updateOffer,
+} from './actions';
 
 type TOffersState = {
   offers: TOffer[];
   currentOffer: TOffer | null;
   isResponse: boolean;
   error: string | null;
+  myOffer: TOffer | null;
 };
 
 const initialState: TOffersState = {
@@ -14,6 +22,7 @@ const initialState: TOffersState = {
   currentOffer: null,
   isResponse: false,
   error: null,
+  myOffer: null,
 };
 
 export const offersSlice = createSlice({
@@ -29,6 +38,18 @@ export const offersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getOfferByUser.pending, (state) => {
+        state.isResponse = true;
+        state.error = null;
+      })
+      .addCase(getOfferByUser.fulfilled, (state, action) => {
+        state.isResponse = false;
+        state.myOffer = action.payload;
+      })
+      .addCase(getOfferByUser.rejected, (state, action) => {
+        state.isResponse = false;
+        state.error = action.payload as string;
+      })
       .addCase(getOffers.pending, (state) => {
         state.isResponse = true;
         state.error = null;
@@ -111,3 +132,4 @@ export const selectedOffers = (state: RootState) => state.offers.offers;
 export const selectedCurrentOffer = (state: RootState) => state.offers.currentOffer;
 export const selectedOffersIsResponse = (state: RootState) => state.offers.isResponse;
 export const selectedOffersError = (state: RootState) => state.offers.error;
+export const selectedMyOffer = (state: RootState) => state.offers.myOffer;

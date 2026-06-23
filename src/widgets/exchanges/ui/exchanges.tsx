@@ -1,32 +1,29 @@
-import type { FC } from 'react';
-import styles from './exchanges.module.css';
-import { useSelector } from '@shared/store';
-import { selectedOffers } from '@entities/offers';
+import { selectAcceptedOffers } from '@entities/application';
 import { selectedUser } from '@entities/user';
+import { useSelector } from '@shared/store';
 import { OfferCardUI } from '@widgets/offer-card/ui';
+import { type FC } from 'react';
+import styles from './exchanges.module.css';
 
 export const Exchanges: FC = () => {
   const user = useSelector(selectedUser);
-  const offers = useSelector(selectedOffers);
 
-  const exchanges = localStorage.getItem('offers');
+  const offers = useSelector(selectAcceptedOffers);
 
-  if (!exchanges) {
-    return <p className={styles.noContent}>Пока что вы еще не предложили обмен</p>;
-  }
-
-  const parsed = JSON.parse(exchanges);
-
-  const filteredOffers = offers.filter((item) => parsed[user?.id as string]?.includes(item.id));
-
-  if (!filteredOffers.length) {
+  if (!offers.length) {
     return <p className={styles.noContent}>Нет доступных предложений для обмена</p>;
   }
 
   return (
     <div className={styles.exchanges}>
-      {filteredOffers.map((item) => (
-        <OfferCardUI key={item.id} offer={item} userId={user?.id} />
+      {offers.map((item) => (
+        <OfferCardUI
+          key={item.id}
+          offer={item.offer}
+          recivedId={item.id}
+          isRecivedAccepted
+          userId={user?.id}
+        />
       ))}
     </div>
   );

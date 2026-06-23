@@ -1,30 +1,30 @@
-import { useMemo } from 'react';
 import { useSelector } from '@shared/store';
+import { useMemo } from 'react';
 
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 
-import type { TOffer } from '@entities/offers/api/types';
-import type { TUser } from '@entities/user/api/types';
 import type { TCategory } from '@entities/categories';
-import type { TSubCategory } from '@entities/subcategories';
-import type { TCity } from '@entities/cities';
-import {
-  selectedSubcategories,
-  selectedSubcategoriesError,
-  selectedSubcategoriesIsResponse,
-} from '@entities/subcategories';
-import { selectedUsers, selectedUserError, selectedUserIsResponse } from '@entities/user';
-import {
-  selectedOffers,
-  selectedOffersError,
-  selectedOffersIsResponse,
-} from '@entities/offers/model';
 import { selectedCategories } from '@entities/categories/model';
+import type { TCity } from '@entities/cities';
 import {
   selectCities,
   selectCitiesError,
   selectCitiesIsLoading,
 } from '@entities/cities/model/slice';
+import type { TOffer } from '@entities/offers/api/types';
+import {
+  selectedOffers,
+  selectedOffersError,
+  selectedOffersIsResponse,
+} from '@entities/offers/model';
+import type { TSubCategory } from '@entities/subcategories';
+import {
+  selectedSubcategories,
+  selectedSubcategoriesError,
+  selectedSubcategoriesIsResponse,
+} from '@entities/subcategories';
+import { selectedUserError, selectedUserIsResponse, selectedUsers } from '@entities/user';
+import type { TUser } from '@entities/user/api/types';
 import type { SkillItem } from '@entities/user/ui/UserCard';
 import { useFilteredUsers, type FiltersState } from '@features/filters';
 import type { CatalogSectionBuckets } from '../buildCatalogSectionItems';
