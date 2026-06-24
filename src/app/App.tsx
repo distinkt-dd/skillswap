@@ -16,7 +16,11 @@ import { useSelector } from '@shared/store';
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { fetchAcceptedOffers, fetchReceivedApplications } from '@entities/application';
+import {
+  fetchAcceptedOffers,
+  fetchReceivedApplications,
+  fetchRejectedApplications,
+} from '@entities/application';
 import { getOfferByUser, getOffers } from '@entities/offers/model/actions';
 import { LayoutProfile } from '@pages/layouts';
 import { useDispatch } from '@shared/store';
@@ -77,6 +81,7 @@ export const App = () => {
     dispatch(getOfferByUser(user.id));
     dispatch(fetchReceivedApplications());
     dispatch(fetchAcceptedOffers());
+    dispatch(fetchRejectedApplications());
   }, [user, dispatch]);
 
   return (

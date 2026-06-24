@@ -3,6 +3,8 @@ import styles from './offer-card.module.css';
 
 import {
   createApplication,
+  deleteApplications,
+  fetchAcceptedOffers,
   fetchReceivedApplications,
   selectReceivedApplications,
   updateApplicationStatus,
@@ -25,6 +27,7 @@ type TOfferCardUI = {
   className?: string;
   recivedId?: string;
   isRecivedAccepted?: boolean;
+  recivedStatus?: string;
 };
 
 export type TSavedOffersData = Record<string, string[]>;
@@ -44,7 +47,7 @@ export const OfferCardUI: FC<TOfferCardUI> = ({
   const user = useSelector(selectedUser);
   const myOffer = useSelector(selectedMyOffer);
   const recivedOffers = useSelector(selectReceivedApplications).map((item) => item.offer);
-  const offerInRecived = recivedOffers.some((o) => o.id === offer.id);
+  const receivedOffer = recivedOffers.find((item) => item.id === offer.id);
 
   const [userOffers, setUserOffers] = useState<TSavedOffersData | null>(() => {
     try {
@@ -94,7 +97,7 @@ export const OfferCardUI: FC<TOfferCardUI> = ({
   const handleOfferClick = async () => {
     if (myOffer) {
       const application = await dispatch(
-        createApplication({ offerId: myOffer.id, userToId: offer.userId })
+        createApplication({ offerId: myOffer.id, offerToId: offer.id, userToId: offer.userId })
       );
       if (application) {
         setModalOpen(true);
@@ -123,6 +126,15 @@ export const OfferCardUI: FC<TOfferCardUI> = ({
     }
     dispatch(updateApplicationStatus({ applicationId: recivedId, status }));
     dispatch(fetchReceivedApplications());
+  };
+
+  const handleEndedOffer = async (id: string | undefined) => {
+    console.log(id);
+    if (id) {
+      dispatch(deleteApplications({ appId: id }));
+    }
+
+    return await dispatch(fetchAcceptedOffers());
   };
 
   return (
@@ -158,7 +170,7 @@ export const OfferCardUI: FC<TOfferCardUI> = ({
             <Button className={styles.offerCard__button} disabled>
               Это ваше предложение
             </Button>
-          ) : isOfferAlreadyProposed ? (
+          ) : isOfferAlreadyProposed && !isRecivedAccepted ? (
             <Button
               className={styles.offerCard__button}
               icon={<IconUI name="clock" />}
@@ -166,7 +178,7 @@ export const OfferCardUI: FC<TOfferCardUI> = ({
             >
               Обмен предложен
             </Button>
-          ) : offerInRecived ? (
+          ) : receivedOffer !== undefined ? (
             <>
               <Button
                 className={styles.offerCard__button}
@@ -182,7 +194,10 @@ export const OfferCardUI: FC<TOfferCardUI> = ({
               </Button>
             </>
           ) : isRecivedAccepted ? (
-            <Button className={styles.offerCard__button} onClick={handleOfferClick}>
+            <Button
+              className={styles.offerCard__button}
+              onClick={() => handleEndedOffer(recivedId)}
+            >
               Закончить сотрудничество
             </Button>
           ) : (

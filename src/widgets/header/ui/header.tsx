@@ -1,4 +1,5 @@
 import { useTheme } from '@app/theme/useTheme';
+import { selectReceivedApplications, selectRejectedApplications } from '@entities/application';
 import { selectedUser } from '@entities/user';
 import { useCatalogFilters } from '@features/filters';
 import { useSelector } from '@shared/store';
@@ -283,6 +284,9 @@ export const Header: FC<Partial<THeaderUIProps>> = ({
       : true
   );
 
+  const applications = useSelector(selectReceivedApplications);
+  const rejectedApplications = useSelector(selectRejectedApplications);
+
   const themeLabel =
     themeMode === 'system'
       ? `Тема: системная, сейчас ${resolvedTheme === 'dark' ? 'темная' : 'светлая'}`
@@ -310,7 +314,10 @@ export const Header: FC<Partial<THeaderUIProps>> = ({
       <div className={`container ${styles.headerContainer}`}>
         {isNotificationOpen && (
           <div ref={notificationRef} className={styles.notificationWrapper}>
-            <NotificationWrapper />
+            <NotificationWrapper
+              applications={applications}
+              rejectedApplications={rejectedApplications}
+            />
           </div>
         )}
 
@@ -417,7 +424,11 @@ export const Header: FC<Partial<THeaderUIProps>> = ({
                   <>
                     <div
                       ref={notificationTriggerRef}
-                      className={styles.notificationIconWrapper}
+                      className={clsx(
+                        styles.notificationIconWrapper,
+                        (applications.length === 0 && rejectedApplications.length === 0) ||
+                          styles.notificationIconWrapperActive
+                      )}
                       onClick={() => setIsNotificationOpen(!isNotificationOpen)}
                     >
                       <IconUI name="notification" className={styles.notificationIcon} />

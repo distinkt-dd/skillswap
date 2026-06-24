@@ -16,15 +16,27 @@ export const Exchanges: FC = () => {
 
   return (
     <div className={styles.exchanges}>
-      {offers.map((item) => (
-        <OfferCardUI
-          key={item.id}
-          offer={item.offer}
-          recivedId={item.id}
-          isRecivedAccepted
-          userId={user?.id}
-        />
-      ))}
+      {offers.map((item) =>
+        item.offer.userId === user?.id ? (
+          <OfferCardUI
+            key={item.offerTo.id}
+            offer={item.offerTo}
+            recivedId={item.id}
+            recivedStatus={item.status}
+            isRecivedAccepted
+            userId={item.offerTo.userId}
+          />
+        ) : (
+          <OfferCardUI
+            key={item.offer.id}
+            offer={item.offer}
+            recivedId={item.id}
+            recivedStatus={item.status}
+            isRecivedAccepted
+            userId={user?.id}
+          />
+        )
+      )}
     </div>
   );
 };

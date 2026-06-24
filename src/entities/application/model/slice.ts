@@ -1,10 +1,17 @@
 // model/slice.ts
 import { createSlice } from '@reduxjs/toolkit';
-import type { AcceptedOffer, Application, ReceivedApplication } from '../api/types';
+import type {
+  AcceptedOffer,
+  Application,
+  ReceivedApplication,
+  RejectedApplication,
+} from '../api/types';
 import {
   createApplication,
+  deleteApplications,
   fetchAcceptedOffers,
   fetchReceivedApplications,
+  fetchRejectedApplications,
   updateApplicationStatus,
 } from './actions';
 
@@ -14,11 +21,13 @@ type ApplicationState = {
   currentApplication: Application | null; // последняя созданная/обновлённая
   loading: boolean;
   error: string | null;
+  rejectedApplications: RejectedApplication[];
 };
 
 const initialState: ApplicationState = {
   receivedApplications: [],
   acceptedOffers: [],
+  rejectedApplications: [],
   currentApplication: null,
   loading: false,
   error: null,
@@ -43,6 +52,7 @@ export const applicationSlice = createSlice({
     selectCurrentApplication: (state) => state.currentApplication,
     selectApplicationLoading: (state) => state.loading,
     selectApplicationError: (state) => state.error,
+    selectRejectedApplications: (state) => state.rejectedApplications,
   },
   extraReducers: (builder) => {
     builder
@@ -88,6 +98,35 @@ export const applicationSlice = createSlice({
         state.error = action.error.message || 'Ошибка получения входящих заявок';
       })
 
+      // --- rejectedReceivedApplications ---
+      .addCase(fetchRejectedApplications.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchRejectedApplications.fulfilled, (state, action) => {
+        state.loading = false;
+        state.rejectedApplications = action.payload;
+      })
+      .addCase(fetchRejectedApplications.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || 'Ошибка получения входящих заявок';
+      })
+
+      .addCase(deleteApplications.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+
+      .addCase(deleteApplications.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+
+      .addCase(deleteApplications.rejected, (state, action) => {
+        state.loading = true;
+        state.error = action.error.message as string;
+      })
+
       // --- updateApplicationStatus ---
       .addCase(updateApplicationStatus.pending, (state) => {
         state.loading = true;
@@ -121,4 +160,5 @@ export const {
   selectCurrentApplication,
   selectApplicationLoading,
   selectApplicationError,
+  selectRejectedApplications,
 } = applicationSlice.selectors;

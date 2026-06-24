@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import styles from './notification.module.css';
-import type { NotificationProps } from './types';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../button';
 import { IconUI } from '../icons';
+import styles from './notification.module.css';
+import type { NotificationProps } from './types';
 
 //  IconUI
 const getIconByType = (type: NotificationProps['type']) => {

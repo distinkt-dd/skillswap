@@ -204,7 +204,9 @@
 
 .notificationIconWrapper {
   position: relative;
+}
 
+.notificationIconWrapperActive {
   &::after {
     position: absolute;
     top: 0;

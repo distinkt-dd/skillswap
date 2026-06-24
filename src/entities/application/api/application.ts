@@ -4,6 +4,7 @@ import type {
   AcceptedOffer,
   Application,
   ReceivedApplication,
+  RejectedApplication,
   UpdateApplicationStatusPayload,
 } from './types';
 
@@ -15,10 +16,14 @@ export class ApplicationApi extends Api {
   }
 
   // POST /applications/:offerId
-  async createApplication(offerId: string, userToId: string): Promise<Application> {
+  async createApplication(
+    offerId: string,
+    offerToId: string,
+    userToId: string
+  ): Promise<Application> {
     return this.post<Application, never>(
       undefined, // тело пустое
-      `${this.baseUrl}/${APPLICATION_ENDPOINT}/${offerId}/${userToId}`
+      `${this.baseUrl}/${APPLICATION_ENDPOINT}/${offerId}/${offerToId}/${userToId}`
     );
   }
 
@@ -32,6 +37,16 @@ export class ApplicationApi extends Api {
     return this.get<ReceivedApplication[]>(
       `${this.baseUrl}/${APPLICATION_ENDPOINT}/received-applications`
     );
+  }
+
+  async getRejectedApplications(): Promise<RejectedApplication[]> {
+    return this.get<RejectedApplication[]>(
+      `${this.baseUrl}/${APPLICATION_ENDPOINT}/rejected-applications`
+    );
+  }
+
+  async deleteApplications(appId: string) {
+    return this.delete(`${this.baseUrl}/${APPLICATION_ENDPOINT}/${appId}`);
   }
 
   // PATCH /applications/:applicationId

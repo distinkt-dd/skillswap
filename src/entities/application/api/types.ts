@@ -6,7 +6,8 @@ export interface Application {
   userFromId: string;
   userToId: string;
   offerId: string;
-  status: 'PENDING' | 'ACCEPTED' | 'REJECTED';
+  offerToId: string;
+  status: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'CANCELED';
   createdAt: string;
   updatedAt: string;
 }
@@ -17,6 +18,22 @@ export interface ReceivedApplication {
   status: 'PENDING';
   createdAt: string;
   userFrom: {
+    name: string;
+    avatar: string;
+  };
+  offer: TOffer;
+  offerTo: TOffer;
+}
+
+export interface RejectedApplication {
+  id: string;
+  status: 'REJECTED';
+  createdAt: string;
+  userFrom: {
+    name: string;
+    avatar: string;
+  };
+  userTo: {
     name: string;
     avatar: string;
   };
